@@ -1,0 +1,6 @@
+stanza
+rapidfuzz
+transformers
+torch
+scikit-learn
+numpy
