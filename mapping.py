@@ -47,10 +47,12 @@ def map_to_lemma(word: dict, gloss_dict: dict) -> str:
                     return word
                 
     best_match = fuzzy_match(word['lemma'], gloss_dict.keys())
-    if best_match and best_match[1] > 60:  # порог сходства
-        print(best_match, best_match[1], "тест")
-        word['lemma_dict'] = best_match[0]
-        return word
+    upos_dict = {"ADJ": "прилагательное", "NOUN": "существительное", "PRON": "местоимение", "VERB": "глагол", "PART": "частица"}
+    
+    if (upos_dict[word["upos"]] == gloss_dict[best_match[0]]["часть_речи"] or (word["upos"] == "NOUN" and  gloss_dict[best_match[0]]["часть_речи"] == "существительное")):
+        if len(best_match[0]) < len(word['lemma']) and best_match[1] >= 60:
+            word['lemma_dict'] = best_match[0]
+            return word
     
     word['gloss'] = f"<{word['lemma']}>"
     return word
