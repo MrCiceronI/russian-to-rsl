@@ -5,7 +5,7 @@ from reordering import reorder_to_rsl
 # stanza.download('ru')
 nlp = stanza.Pipeline('ru', processors='tokenize,pos,lemma,depparse')
 
-stop_upos = ['ADP', 'CCONJ', 'SCONJ', 'PART', 'PUNCT']
+stop_upos = ['ADP', 'CCONJ', 'SCONJ', 'PUNCT']
 time_adverbs = ["сейчас", "сегодня", "вчера", "завтра",
                 "утром", "днем", "вечером", "ночью"]
 
@@ -28,15 +28,3 @@ def preprocessing(sent: str) -> list:
     tokens = reorder_to_rsl(tokens)
 
     return tokens
-if __name__ == "__main__":
-    """
-    for s in ["Я подобрался, и передал книжечку!", "Завтра я пойду в школу утром", "Где мой телефон?"]:
-        tokens = preprocessing(s)
-        result = []
-        for i in tokens:
-            result.append(i['lemma'])
-        print(result)"""
-
-    s = "Мама купила мне книги."
-    tokens = preprocessing(s)
-    print(tokens)
