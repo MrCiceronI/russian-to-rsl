@@ -1,0 +1,6 @@
+tensorflow==2.13.0
+keras==2.13.1
+spoken-to-signed==0.0.2
+sign-language-datasets==0.4.0
+importlib_resources==7.1.0
+pose-to-video[pix2pix,simple_upscaler] @ git+https://github.com/sign-language-processing/pose-to-video
