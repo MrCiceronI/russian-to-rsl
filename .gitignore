@@ -1,1 +1,10 @@
-__pycache__/
+de_module/.venv/
+de_module/__pycache__/
+de_module/lexicon/
+ru_module/__pycache__/
+ru_module/result.mp4
+web/__pycache__/
+web/videos_de/
+web/videos_ru/
+web/vosk-model-small-de-0.15
+web/vosk-model-small-ru-0.22

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Переводчик в глоссы языков жестов</title>
+    </head>
+    <body>
+        <header>
+            <h1>Переводчик в глоссы языков жестов</h1>
+        </header>
+        <main>
+            <section>
+                <div class="language-selector">
+                    <label>Выберите язык:</label>
+                    <div>
+                        <label class="radio-label">
+                            <input
+                                type="radio"
+                                name="language"
+                                value="ru"
+                                checked
+                            />
+                            <span class="radio-custom"></span>
+                            Русский
+                        </label>
+                    </div>
+                    <div>
+                        <label class="radio-label">
+                            <input type="radio" name="language" value="de" />
+                            <span class="radio-custom"></span>
+                            Deutsch
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <textarea
+                        id="textInput"
+                        rows="5"
+                        placeholder="Введите текст здесь или используйте голосовой ввод..."
+                    ></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button id="submitBtn">Перевести в жесты</button>
+                    <button id="voiceBtn" class="voice-btn">
+                        Голосовой ввод
+                    </button>
+                </div>
+
+                <div id="status" class="status"></div>
+
+                <!-- Блок для видео результата -->
+                <div id="videoBlock" class="video-block" style="display: none">
+                    <h2>Результат перевода:</h2>
+                    <video
+                        id="resultVideo"
+                        autoplay
+                        controls
+                        style="width: 100%; max-width: 100%"
+                    >
+                        Ваш браузер не поддерживает видео
+                    </video>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2026 Переводчик в глоссы языков жестов</p>
+        </footer>
+        <script src="/static/script.js"></script>
+    </body>
+</html>

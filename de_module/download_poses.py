@@ -1,22 +1,19 @@
-import urllib.request
-import tarfile
 import os
+import tarfile
+
+import wget
 
 url = "https://datasets.sigma-sign-language.com/poses/holistic/signsuisse.tar"
 extract_path = r".\lexicon"
 
 os.makedirs(extract_path, exist_ok=True)
 
-archive_path = os.path.join(extract_path, "signsuisse.tar")
+# wget автоматически поддерживает докачку
+filename = wget.download(url, out=extract_path, bar=wget.bar_adaptive)
 
-print("Начинаю скачивание архива...")
-urllib.request.urlretrieve(url, archive_path)
-print("Скачивание завершено.")
-
-print("Распаковка архива...")
-with tarfile.open(archive_path, "r") as tar:
+print("\nРаспаковка...")
+with tarfile.open(os.path.join(extract_path, "signsuisse.tar"), "r") as tar:
     tar.extractall(path=extract_path)
-print("Распаковка завершена.")
 
-os.remove(archive_path)
-print("Архив удален. Готово.")
+os.remove(os.path.join(extract_path, "signsuisse.tar"))
+print("Готово!")
