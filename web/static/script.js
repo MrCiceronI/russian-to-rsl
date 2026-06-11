@@ -17,7 +17,7 @@ radioButtons.forEach((radio) => {
     selectedLanguage = e.target.value;
     const langName =
       selectedLanguage === "ru" ? "Русский → РЖЯ" : "Deutsch → DGS";
-    showStatus(`🌐 Выбран язык: ${langName}`, "info");
+    showStatus(`Выбран язык: ${langName}`, "info");
 
     // Обновляем placeholder
     textInput.placeholder =
@@ -46,8 +46,8 @@ async function submitText(text) {
 
   // Скрываем предыдущее видео
   videoBlock.style.display = "none";
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Отправка...";
+  submitBtn.classList.add("processing");
+  submitBtn.style.pointerEvents = "none";
 
   try {
     const formData = new FormData();
@@ -72,16 +72,16 @@ async function submitText(text) {
       videoBlock.style.display = "block";
     }
 
-    showStatus("✅ Видео готово!", "success");
+    showStatus("Видео готово!", "success");
 
     return true;
   } catch (error) {
     console.error("Ошибка:", error);
-    showStatus(`❌ Ошибка: ${error.message}`, "error");
+    showStatus(`Ошибка: ${error.message}`, "error");
     return false;
   } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "🤟 Перевести в жесты";
+    submitBtn.classList.remove("processing");
+    submitBtn.style.pointerEvents = "";
   }
 }
 
@@ -124,14 +124,14 @@ async function startRecording() {
     mediaRecorder.start(1000);
     isRecording = true;
     voiceBtn.classList.add("recording");
-    voiceBtn.textContent = "⏹️ Остановить запись";
+    voiceBtn.textContent = "Остановить запись";
     showStatus(
-      `🎙️ Говорите на ${selectedLanguage === "ru" ? "русском" : "немецком"}...`,
+      `Говорите на ${selectedLanguage === "ru" ? "русском" : "немецком"}...`,
       "info",
     );
   } catch (error) {
     console.error("Ошибка:", error);
-    showStatus("❌ Нет доступа к микрофону", "error");
+    showStatus("Нет доступа к микрофону", "error");
   }
 }
 
@@ -140,13 +140,14 @@ function stopRecording() {
     mediaRecorder.stop();
     isRecording = false;
     voiceBtn.classList.remove("recording");
-    voiceBtn.textContent = "🎤 Голосовой ввод";
-    showStatus("⏳ Обработка...", "info");
+    voiceBtn.textContent = "Голосовой ввод";
+    showStatus("Обработка...", "info");
   }
 }
 
 async function sendAudioToServer(audioBlob) {
-  voiceBtn.disabled = true;
+  voiceBtn.classList.add("processing");
+  voiceBtn.style.pointerEvents = "none";
 
   try {
     const formData = new FormData();
@@ -166,16 +167,17 @@ async function sendAudioToServer(audioBlob) {
 
     if (data.success) {
       textInput.value = data.text;
-      showStatus(`✅ Распознано: "${data.text}"`, "success");
+      showStatus(`Распознано: "${data.text}"`, "success");
       await submitText(data.text);
     } else {
-      showStatus(`❌ ${data.error}`, "error");
+      showStatus(`${data.error}`, "error");
     }
   } catch (error) {
     console.error("Ошибка:", error);
-    showStatus(`❌ ${error.message}`, "error");
+    showStatus(`${error.message}`, "error");
   } finally {
-    voiceBtn.disabled = false;
+    voiceBtn.classList.remove("processing");
+    voiceBtn.style.pointerEvents = "";
   }
 }
 
@@ -191,5 +193,5 @@ voiceBtn.addEventListener("click", () => {
 // Проверка поддержки
 if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
   voiceBtn.disabled = true;
-  showStatus("❌ Голосовой ввод не поддерживается", "error");
+  showStatus("Голосовой ввод не поддерживается", "error");
 }

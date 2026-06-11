@@ -1,0 +1,520 @@
+/* ============================================
+   ROOT VARIABLES
+============================================ */
+:root {
+    /* Основные цвета */
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --secondary: #ec4899;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    /* Фоновые цвета */
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --bg-card: #ffffff;
+    --bg-surface: #f8fafc;
+
+    /* Текст */
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+
+    /* Границы и тени */
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+    /* Анимации */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+
+    /* Радиусы */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+}
+
+/* ============================================
+   GLOBAL RESET
+============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        sans-serif;
+    background: linear-gradient(
+        135deg,
+        var(--bg-gradient-start),
+        var(--bg-gradient-end)
+    );
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   MAIN CONTAINER
+============================================ */
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+============================================ */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #e0e7ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   MAIN CARD
+============================================ */
+main {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-xl);
+}
+
+/* ============================================
+   LANGUAGE SELECTOR
+============================================ */
+.language-selector {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+}
+
+.language-selector > label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.language-selector > div {
+    margin-bottom: 0.5rem;
+}
+
+.language-selector > div:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   RADIO BUTTONS
+============================================ */
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none;
+    padding: 0.5rem 0;
+    transition: var(--transition-fast);
+}
+
+.radio-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio-custom {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    background: white;
+    transition: all var(--transition-fast);
+}
+
+.radio-custom::after {
+    content: "";
+    position: absolute;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: var(--primary);
+    transform: scale(0);
+    transition: transform var(--transition-fast);
+}
+
+.radio-label input:checked + .radio-custom {
+    border-color: var(--primary);
+}
+
+.radio-label input:checked + .radio-custom::after {
+    transform: scale(1);
+}
+
+.radio-label:hover .radio-custom {
+    border-color: var(--primary-light);
+}
+
+/* ============================================
+   INPUT GROUP
+============================================ */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    resize: vertical;
+    transition: all var(--transition-fast);
+    background: white;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+textarea:hover {
+    border-color: var(--primary-light);
+}
+
+/* ============================================
+   BUTTON GROUP
+============================================ */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+button {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#submitBtn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+#submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+#submitBtn:active {
+    transform: translateY(0);
+}
+
+#voiceBtn {
+    background: linear-gradient(135deg, var(--warning), #ea580c);
+    color: white;
+}
+
+#voiceBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+#voiceBtn:active {
+    transform: translateY(0);
+}
+
+#voiceBtn.recording {
+    background: linear-gradient(135deg, var(--danger), #b91c1c);
+    animation: pulse 1.5s infinite;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button.processing {
+    opacity: 0.7;
+    cursor: wait;
+    pointer-events: none;
+}
+
+/* ============================================
+   STATUS MESSAGES
+============================================ */
+.status {
+    margin-bottom: 1.5rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    display: none;
+    animation: slideIn var(--transition-normal);
+}
+
+.status.info {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-left: 4px solid #0ea5e9;
+}
+
+.status.success {
+    background: #dcfce7;
+    color: #15803d;
+    border-left: 4px solid #22c55e;
+}
+
+.status.error {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-left: 4px solid #ef4444;
+}
+
+/* ============================================
+   VIDEO BLOCK
+============================================ */
+.video-block {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--bg-surface), #f1f5f9);
+    border-radius: var(--radius-lg);
+    animation: fadeIn var(--transition-normal);
+}
+
+.video-block h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.video-block video {
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   FOOTER
+============================================ */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   ANIMATIONS
+============================================ */
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   ADAPTIVE DESIGN
+============================================ */
+
+/* Планшеты (768px и выше) */
+@media (min-width: 768px) {
+    body {
+        padding: 3rem 2rem;
+    }
+
+    main {
+        padding: 2.5rem;
+    }
+
+    .button-group {
+        flex-wrap: nowrap;
+    }
+}
+
+/* Десктопы (1024px и выше) */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1080px;
+    }
+
+    main {
+        padding: 3rem;
+    }
+
+    button {
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
+    }
+
+    textarea {
+        font-size: 1.125rem;
+    }
+}
+
+/* Мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+    main {
+        padding: 1.25rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .language-selector {
+        padding: 0.75rem;
+    }
+
+    .video-block {
+        padding: 1rem;
+    }
+
+    .video-block h2 {
+        font-size: 1rem;
+    }
+}
+
+/* Темная тема (по желанию пользователя) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-card: #1e293b;
+        --bg-surface: #0f172a;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --border: #334155;
+    }
+
+    textarea {
+        background: #334155;
+        color: #f1f5f9;
+    }
+
+    textarea::placeholder {
+        color: #94a3b8;
+    }
+}
+
+/* Улучшенная доступность */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Фокус для клавиатуры */
+button:focus-visible,
+textarea:focus-visible,
+.radio-label input:focus-visible + .radio-custom {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   LOADING STATE
+============================================ */
+button:disabled {
+    position: relative;
+    color: transparent;
+}
+
+button:disabled::after {
+    content: "";
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

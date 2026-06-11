@@ -1,4 +1,4 @@
-# context_disambiguator.py
+# sense_disambiguator.py
 
 import json
 
